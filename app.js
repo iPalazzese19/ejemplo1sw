@@ -36,7 +36,7 @@ app.use(session({
   }
 }));
 
-app.use('/', routes);
+app.use('/', index);
 app.use('/api', api);
 app.use('/users', users);
 
