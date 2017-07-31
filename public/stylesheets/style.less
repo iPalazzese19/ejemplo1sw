@@ -1,8 +1,22 @@
+@colorDeFondo: #2E7A9F;
+@defaultFontSize: 16px;
+@containerBckColor: rgba(255,255,255,0.8);
+
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: @defaultFontSize "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: @colorDeFondo;
 }
 
 a {
-  color: #00B7FF;
+  color: #333;
+}
+
+.container{
+  max-width:920px;
+  width: 100px;
+  padding: 1em;
+  background-color: @containerBckColor;
+  border-radius: 3px;
+  box-shadow: 0 0 3px #000;
 }

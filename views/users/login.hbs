@@ -1,0 +1,44 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+      <h1>Iniciar Sesion</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col.sm-6 col-sm-offset-3">
+      <form action="/users/login" method="post">
+        <div class="form-group {{emailHasError}}">
+          <label for="txtEmail">Correo Electronico</label>
+          <input type="email" class="form-control" id="txtEmail" placeholder="correo@ejemplo.com" name="txtEmail" value="{{txtEmail}}">
+        </div>
+        <div class="form-group {{pswdHasError}}">
+          <label for="txtPassword">Contraseña</label>
+          <input type="password" class="form-control" id="txtPassword" placeholder="password" name="txtPassword">
+        </div>
+        <div class="{{errorMsgClass}}">
+          <ul>
+            {{#each errorMsgs}}
+              <li>
+                {{this}}
+              </li>
+            {{/each}}
+          </ul>
+        </div>
+        <div class="pull-right">
+          <button class="btn btn-default" id="btnProcesar"></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  $().ready(function(){
+    $("#btnProcesar").on('onclick', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      //hacer validaciones de los campos
+      document.forms[0].submit();
+    });
+  });
+</script>

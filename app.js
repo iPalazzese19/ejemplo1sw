@@ -5,9 +5,11 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var lessMiddleware = require('less-middleware');
+var session = require('express-session');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var api = require('./routes/api')();
 
 var app = express();
 
@@ -24,8 +26,35 @@ app.use(cookieParser());
 app.use(lessMiddleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
+//crear una sesion en la memoria - vid 5
+app.use(session({
+  secret: 'mi frase secreta',
+  resave: true,
+  saveUnitialized: true,
+  cookie:{
+    maxAge:1000*60*60*3 //duracion en segundos de la sesion
+  }
+}));
+
+app.use('/', routes);
+app.use('/api', api);
 app.use('/users', users);
+
+/* puedo modificar desde aqui */
+app.get('/test', function(req, res, next){
+  var renderObject = {};
+  renderObject.Nombre = "Italo Palazzese";
+  renderObject.Items = [];
+  renderObject.Items.push({itemLabel:"Item 1"});
+  renderObject.Items.push({itemLabel:"Item 2"});
+  renderObject.Items.push({itemLabel:"Item 3"});
+  res.render('test', {});
+});
+
+app.post('/test', function(req, res, next){
+
+});
+/* hasta aqui */
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
